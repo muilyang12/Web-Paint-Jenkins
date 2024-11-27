@@ -2,7 +2,7 @@
 
 ## Overview
 
-This repository, Web-Paint-Jenkins, is dedicated to the CI/CD Jenkins pipeline for deploying the web service built with Next.js and Spring Boot, which resides in the [Web-Paint](https://github.com/muilyang12/Web-Paint) repository. The CI/CD process utilizes Jenkins for continuous integration and Docker for containerized deployment.
+This repository, Web-Paint-Jenkins, is dedicated to the **CI/CD Jenkins pipeline** for deploying the web service built with **Next.js** and **Spring Boot**, which resides in the [Web-Paint](https://github.com/muilyang12/Web-Paint) repository. The CI/CD process utilizes **Jenkins** for continuous integration and **Docker** for containerized deployment.
 
 ## Technologies Used
 
@@ -13,8 +13,8 @@ This repository, Web-Paint-Jenkins, is dedicated to the CI/CD Jenkins pipeline f
 
 ### DevOps
 
-- Jenkins
-- Docker
+- **Jenkins**
+- **Docker**
 
 ## Jenkins CI/CD Deployment Diagram
 
