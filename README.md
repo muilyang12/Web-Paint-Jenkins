@@ -1,35 +1,21 @@
-# Web-Paint
+# Web-Paint-Jenkins
 
 ## Overview
 
-This project is a paint sharing application built using WebSockets, allowing multiple users to interact in real-time. The application is built using Jenkins for continuous integration and is deployed using Docker.
+This repository, Web-Paint-Jenkins, is dedicated to the CI/CD Jenkins pipeline for deploying the web service built with Next.js and Spring Boot, which resides in the [Web-Paint](https://github.com/muilyang12/Web-Paint) repository. The CI/CD process utilizes Jenkins for continuous integration and Docker for containerized deployment.
 
 ## Technologies Used
 
-### Frontend
+### Frontend and Backend (Web-Paint)
 
-- TypeScript, React.js, Vite, WebSocket
-
-### Backend
-
-- Java, Spring Boot, WebSocket
+- Frontend: TypeScript, React.js, Vite, WebSocket
+- Backend: Java, Spring Boot, Gradle, WebSocket
 
 ### DevOps
 
 - Jenkins
 - Docker
 
-## Installation and Setup Instructions
-
-Provide installation and setup instructions here.
-
-1. Clone the repository.
-   ```sh
-   git clone https://github.com/muilyang12/Web-Paint.git
-   ```
-
 ## Jenkins CI/CD Deployment Diagram
-
-- **Paint Sharing Application Deployment Workflow**
 
 <img src="./Web Paint Jenkins Diagram.png" alt="Jenkins Diagram" width=800>
