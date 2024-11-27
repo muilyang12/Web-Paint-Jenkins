@@ -18,4 +18,6 @@ This repository, Web-Paint-Jenkins, is dedicated to the CI/CD Jenkins pipeline f
 
 ## Jenkins CI/CD Deployment Diagram
 
-<img src="./Web Paint Jenkins Diagram.png" alt="Jenkins Diagram" width=800>
+<div align="center">
+   <img src="./Diagram.png" alt="Jenkins Stage Diagram" width="500" />
+</div>
