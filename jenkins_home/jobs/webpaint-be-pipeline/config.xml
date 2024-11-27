@@ -1,0 +1,66 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<flow-definition plugin="workflow-job@1468.vcf4f5ee92395">
+  <actions>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobAction plugin="pipeline-model-definition@2.2218.v56d0cda_37c72"/>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction plugin="pipeline-model-definition@2.2218.v56d0cda_37c72">
+      <jobProperties/>
+      <triggers/>
+      <parameters/>
+      <options/>
+    </org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction>
+  </actions>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@3996.va_f5c1799f978">
+    <script>pipeline {
+    agent any
+
+    stages {
+        stage(&quot;Checkout&quot;) {
+            steps {
+                git url: &quot;https://github.com/muilyang12/Web-Paint.git&quot;, branch: &quot;main&quot;
+            }
+        }
+
+        stage(&quot;Set Gradle Wrapper Permissions&quot;) {
+            steps {
+                dir(&quot;webpaint-be&quot;) {
+                    sh &quot;chmod +x gradlew&quot;
+                }
+            }
+        }
+
+
+        stage(&quot;Build&quot;) {
+            steps {
+                dir(&quot;webpaint-be&quot;) {
+                    sh &quot;./gradlew clean build&quot;
+                }
+            }
+        }
+
+        stage(&quot;Docker Build&quot;) {
+            steps {
+                dir(&quot;webpaint-be&quot;) {
+                    sh &quot;docker build -t webpaint-be:${BUILD_NUMBER} .&quot;
+                }
+            }
+        }
+
+        stage(&quot;Deploy&quot;) {
+            steps {
+                sh &quot;&quot;&quot;
+                    docker stop webpaint-be || true
+                    docker rm webpaint-be || true
+                    docker run -d -p 8080:8080 --name webpaint-be webpaint-be:${BUILD_NUMBER}
+                &quot;&quot;&quot;
+            }
+        }
+    }
+}</script>
+    <sandbox>true</sandbox>
+  </definition>
+  <triggers/>
+  <disabled>false</disabled>
+</flow-definition>
