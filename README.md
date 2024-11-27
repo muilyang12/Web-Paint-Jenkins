@@ -6,7 +6,7 @@ This repository, Web-Paint-Jenkins, is dedicated to the CI/CD Jenkins pipeline f
 
 ## Technologies Used
 
-### Frontend and Backend (Web-Paint)
+### Frontend and Backend ([Web-Paint](https://github.com/muilyang12/Web-Paint))
 
 - Frontend: TypeScript, React.js, Vite, WebSocket
 - Backend: Java, Spring Boot, Gradle, WebSocket
