@@ -24,7 +24,6 @@ RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "/tmp/aws
     && /tmp/aws/install \
     && rm -rf /tmp/aws /tmp/awscliv2.zip
 
-
 USER jenkins
 
 RUN jenkins-plugin-cli --plugins "blueocean docker-workflow"
