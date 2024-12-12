@@ -18,6 +18,13 @@ RUN echo "deb [arch=$(dpkg --print-architecture) \
 # Update package lists again and install Docker CLI
 RUN apt-get update && apt-get install -y docker-ce-cli
 
+# Install AWS CLI V2
+RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "/tmp/awscliv2.zip" \
+    && unzip /tmp/awscliv2.zip -d /tmp \
+    && /tmp/aws/install \
+    && rm -rf /tmp/aws /tmp/awscliv2.zip
+
+
 USER jenkins
 
 RUN jenkins-plugin-cli --plugins "blueocean docker-workflow"
