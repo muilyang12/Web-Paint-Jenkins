@@ -16,6 +16,11 @@
     <script>pipeline {
     agent any
 
+    environment {
+        AWS_REGION = &quot;${env.AWS_REGION}&quot;
+        AWS_ACCOUNT_ID = &quot;${env.AWS_ACCOUNT_ID}&quot;
+    }
+
     stages {
         stage(&quot;Checkout&quot;) {
             steps {
@@ -30,7 +35,6 @@
                 }
             }
         }
-
 
         stage(&quot;Build&quot;) {
             steps {
@@ -55,6 +59,29 @@
                     docker rm webpaint-be || true
                     docker run -d -p 8080:8080 --name webpaint-be webpaint-be:${BUILD_NUMBER}
                 &quot;&quot;&quot;
+            }
+        }
+
+        stage(&quot;Login to ECR&quot;) {
+            steps {
+                withCredentials([[$class: &apos;AmazonWebServicesCredentialsBinding&apos;, credentialsId: &apos;UTDEmailRootAccountCredential&apos;]]) {
+                    sh &quot;&quot;&quot;
+                        aws ecr get-login-password --region ${AWS_REGION} | \
+                        docker login --username AWS \
+                        --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com
+                    &quot;&quot;&quot;
+                }
+            }
+        }
+
+        stage(&quot;Push to ECR&quot;) {
+            steps {
+                withCredentials([[$class: &apos;AmazonWebServicesCredentialsBinding&apos;, credentialsId: &apos;UTDEmailRootAccountCredential&apos;]]) {
+                    sh &quot;&quot;&quot;
+                        docker tag webpaint-be:${BUILD_NUMBER} ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/webpaint-be:${BUILD_NUMBER}
+                        docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/webpaint-be:${BUILD_NUMBER}
+                    &quot;&quot;&quot;
+                }
             }
         }
     }
